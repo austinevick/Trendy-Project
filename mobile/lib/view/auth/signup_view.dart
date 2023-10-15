@@ -123,7 +123,9 @@ class _SignupViewState extends State<SignupView> {
                                     password: password.text.trim(),
                                     about: '',
                                     imageUrl: '',
-                                    profession: 'Carpenter');
+                                    followers: [],
+                                    following: [],
+                                    profession: profession.text.trim());
                                 ref
                                     .read(authViewModel.notifier)
                                     .register(model);

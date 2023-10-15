@@ -1,3 +1,4 @@
+import { log } from 'console';
 import jwt from 'jsonwebtoken';
 import util from 'util';
 
@@ -18,6 +19,7 @@ export const protect = async (req, res, next) => {
         await util.promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
     } catch (error) {
+
         if (error.expiredAt && error.expiredAt < new Date()) {
             return res.status(401).json({
                 status: 401,
@@ -26,7 +28,7 @@ export const protect = async (req, res, next) => {
         } else {
             return res.status(401).json({
                 status: 401,
-                message: error.message
+                message: 'Invalid token'
             });
         }
     }

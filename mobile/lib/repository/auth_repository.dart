@@ -22,7 +22,7 @@ class AuthRepository {
 
   static Future<RegisterResponseModel> register(RegisterModel model) async {
     final response = await _client.post(Uri.parse("${baseUrl}user/register"),
-        body: model.toJson());
+        headers: {...customHeader}, body: jsonEncode(model.toJson()));
     final data = jsonDecode(response.body);
     print(data);
     return RegisterResponseModel.fromJson(data);

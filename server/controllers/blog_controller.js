@@ -1,7 +1,8 @@
 import Blog from '../models/blog_model.js';
 import httpStatus from 'http-status';
-import mongoose from 'mongoose';
+import mongoose, { Query } from 'mongoose';
 import User from '../models/user_model.js';
+import { query } from 'express';
 
 export const createBlog = async (req, res) => {
     try {
@@ -57,15 +58,13 @@ export const getBlogByUserId = async (req, res) => {
 };
 
 export const getBlogs = async (req, res) => {
-    const query = {};
+
     try {
-        if (req.query.keyword) {
-            query.$or = [
-                { "title": { $regex: req.query.keyword, $options: 'i' } },
-                { "description": { $regex: req.query.keyword, $options: 'i' } },
-            ];
-        }
-        const data = await Blog.find(query).sort({ _id: -1 })
+        const page = req.query.page * 1 || 1;
+        const limit = req.query.limit * 1;
+
+        const data = await Blog.find({}).sort({ _id: -1 })
+            .skip(page * limit).limit(limit)
             .populate({ path: 'author', select: '-password' })
             .populate({
                 path: 'comments', populate: {
@@ -75,6 +74,9 @@ export const getBlogs = async (req, res) => {
         return res.status(200).json({
             status: httpStatus.OK,
             message: 'Success',
+            length: data.length,
+            page: page,
+            limit: limit,
             data: data
         });
     } catch (error) {

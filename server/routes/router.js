@@ -22,7 +22,7 @@ router.get('/user/posts/:id', protect, getUserPosts);
 
 // Blog routes
 router.post('/blog', protect, createBlog);
-router.get('/blog', protect, getBlogs);
+router.get('/blog', getBlogs);
 router.get('/blog/:id', protect, getBlogById);
 router.put('/blog/:id', protect, updateBlog);
 router.put('/blog/likes/:id', protect, likeAndUnlikeBlog);

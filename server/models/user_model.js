@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    imageUrl: { type: String },
+    imageUrl: { type: String, default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Windows_10_Default_Profile_Picture.svg/2048px-Windows_10_Default_Profile_Picture.svg.png' },
     following: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
     followers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
     saved_post: [{ type: mongoose.Schema.ObjectId, ref: 'Blog' }],
@@ -47,9 +47,6 @@ userSchema.methods.matchPassword = async function (enterPassword) {
     return await bcrypt.compare(enterPassword, this.password);
 };
 
-
 const User = mongoose.model('User', userSchema);
-
-
 
 export default User;
