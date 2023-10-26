@@ -5,15 +5,15 @@
     flex-direction: column;
     box-sizing: border-box;
     margin-top: 25vh;
+    max-width: 480px;
+    margin: 25vh auto;
 }
 
 .login form {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
     flex-direction: column;
-    width: 50vw;
 }
 
 .login form input {
@@ -28,18 +28,34 @@
     padding-left: 10px;
     display: flex;
     height: 40px;
-    width: 100%;
+    width: 25rem;
+}
 
+.error-message {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    color: red;
+    font-size: 8;
 }
 
 .login .password {
     border-radius: 8px;
     background: #d8e3f5;
-    width: 100%;
+    width: 25rem;
     display: flex;
     justify-content: space-between;
     height: 40px;
     align-items: center;
     padding-left: 10px;
-    margin-bottom: 25px;
+    margin-top: 20px;
+}
+
+.btn {
+    background-color: 'red';
+    border: none;
+
+    margin-top: 25px;
+    height: 100px;
 }

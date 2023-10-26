@@ -30,7 +30,15 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: 'password is required'
-    }
+    },
+    messages: [
+        {
+            message: String,
+            sender: String,
+            receiver: String,
+            time: Date
+        }
+    ]
 }, {
     timestamps: true
 });

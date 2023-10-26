@@ -30,6 +30,25 @@ export const getUserById = async (req, res) => {
         });
     }
 };
+
+export const getUsers = async (req, res) => {
+    try {
+        const users = await User.find({})
+            .select('-password')
+
+            .exec();
+        return res.status(200).json({
+            status: 200,
+            message: 'Success',
+            data: users
+        });
+    } catch (error) {
+        return res.status(400).json({
+            status: 400,
+            message: error.message
+        });
+    }
+};
 export const getUserPosts = async (req, res) => {
     try {
         const posts = await Blog.where('author').equals(req.params.id)
