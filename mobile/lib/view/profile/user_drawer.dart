@@ -21,7 +21,7 @@ class UserDrawer extends ConsumerWidget {
       child: SafeArea(
           child: Column(
         children: [
-          ref.watch(userDataProvider(userId!)).when(
+          ref.watch(userDataProvider).when(
               data: (data) => Column(
                     children: [
                       const SizedBox(height: 20),
@@ -31,7 +31,7 @@ class UserDrawer extends ConsumerWidget {
                         showIcon: false,
                         onTap: () {
                           Navigator.of(context).pop();
-                          push(ProfileScreen(userId: userId));
+                          push(ProfileScreen(userId: userId!));
                         },
                       ),
                       Text(
@@ -48,7 +48,7 @@ class UserDrawer extends ConsumerWidget {
               error: (e, t) => Padding(
                     padding: const EdgeInsets.only(top: 150),
                     child: CustomErrorWidget(
-                      onPressed: () => ref.refresh(userDataProvider(userId)),
+                      onPressed: () => ref.refresh(userDataProvider),
                     ),
                   ),
               loading: () => const SizedBox.shrink()),

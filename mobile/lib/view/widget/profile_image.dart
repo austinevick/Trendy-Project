@@ -3,24 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../provider/user_profile_provider.dart';
-import '../auth/auth_state_notifier.dart';
 
 class ProfileImage extends StatelessWidget {
-  const ProfileImage({super.key});
+  final String? image;
+  const ProfileImage({super.key, this.image});
 
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, _) {
-      final userId = ref.watch(authProvider).value;
-
-      return ref.watch(userDataProvider(userId!)).when(
+      return ref.watch(userDataProvider).when(
           data: (data) => ClipRRect(
                 borderRadius: BorderRadius.circular(100),
                 child: SizedBox(
                   height: 50,
                   width: 50,
                   child: CachedNetworkImage(
-                    imageUrl: data.imageUrl,
+                    imageUrl: image ?? data.imageUrl,
                     fit: BoxFit.cover,
                     errorWidget: (context, url, error) => const CircleAvatar(
                       radius: 15,

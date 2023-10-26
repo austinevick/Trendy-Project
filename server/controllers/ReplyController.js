@@ -1,6 +1,6 @@
-import Comments from "../models/comment_model.js";
+import Comments from "../models/CommentModel.js";
 import httpStatus from 'http-status';
-import Reply from "../models/reply_model.js";
+import Reply from "../models/ReplyModel.js";
 
 export const replyToComment = async (req, res) => {
     try {

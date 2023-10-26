@@ -1,16 +1,16 @@
 import 'package:client/common/utils.dart';
 import 'package:client/provider/blog_provider.dart';
+import 'package:client/view/message/message_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../model/blog/blog_response_data.dart';
 import '../../auth/auth_state_notifier.dart';
 import '../dialogs/confirm_dialog.dart';
 
 class PostActionBottomSheet extends StatefulWidget {
-  final String blogId;
-  final String posterId;
-  const PostActionBottomSheet(
-      {super.key, required this.blogId, required this.posterId});
+  final BlogResponseData data;
+  const PostActionBottomSheet({super.key, required this.data});
 
   @override
   State<PostActionBottomSheet> createState() => _PostActionBottomSheetState();
@@ -39,14 +39,25 @@ class _PostActionBottomSheetState extends State<PostActionBottomSheet> {
               leading: const Icon(Icons.bookmark_outline),
               title: const Text('Bookmark', style: style),
             ),
-            userId != widget.posterId
+            ListTile(
+              onTap: () => push(MessageScreen(
+                userId: widget.data.author.id,
+                firstName: widget.data.author.firstName,
+                lastName: widget.data.author.lastName,
+                image: widget.data.author.imageUrl,
+              )),
+              leading: const Icon(Icons.chat_outlined),
+              title:
+                  Text('Message ${widget.data.author.firstName}', style: style),
+            ),
+            userId != widget.data.author.id
                 ? const SizedBox.shrink()
                 : ListTile(
                     onTap: () {},
                     leading: const Icon(Icons.edit_outlined),
                     title: const Text('Edit post', style: style),
                   ),
-            userId != widget.posterId
+            userId != widget.data.author.id
                 ? const SizedBox.shrink()
                 : ListTile(
                     onTap: () async {
@@ -58,7 +69,7 @@ class _PostActionBottomSheetState extends State<PostActionBottomSheet> {
                                     'Are you sure you want to delete this post, this action cannot be undone.',
                               ));
                       if (result!) {
-                        ref.read(blogProvider).deleteBlog(widget.blogId);
+                        ref.read(blogProvider).deleteBlog(widget.data.id);
                         pop();
                       }
                     },

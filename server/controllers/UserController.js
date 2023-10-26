@@ -1,8 +1,8 @@
-import User from '../models/user_model.js';
+import User from '../models/UserModel.js';
 import httpStatus from 'http-status';
 import generateToken from '../utils/generate_token.js';
 import bcrypt from 'bcrypt';
-import Blog from '../models/blog_model.js';
+import Blog from '../models/BlogModel.js';
 
 
 export const getUserById = async (req, res) => {

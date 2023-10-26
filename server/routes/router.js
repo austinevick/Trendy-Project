@@ -1,9 +1,10 @@
 import express from 'express';
-import { followAndUnfollow, getUserById, getUserPosts, getUsers, login, register, updatePassword, updateProfilePicture, updateUserProfile } from '../controllers/user_controller.js';
+import { followAndUnfollow, getUserById, getUserPosts, getUsers, login, register, updatePassword, updateProfilePicture, updateUserProfile } from '../controllers/UserController.js';
 import { protect } from '../utils/middleware.js';
-import { createBlog, deleteBlog, getBlogById, getBlogs, likeAndUnlikeBlog, updateBlog } from '../controllers/blog_controller.js';
-import { createComment, deleteComment, getCommentByBlogId, getCommentById, likesAndUnlikeComment } from '../controllers/comment_controller.js';
-import { getRepliesByCommentId, replyToComment } from '../controllers/reply_controller.js';
+import { createBlog, deleteBlog, getBlogById, getBlogs, likeAndUnlikeBlog, updateBlog } from '../controllers/BlogController.js';
+import { createComment, deleteComment, getCommentByBlogId, getCommentById, likesAndUnlikeComment } from '../controllers/CommentController.js';
+import { getRepliesByCommentId, replyToComment } from '../controllers/ReplyController.js';
+import { sendMessage } from '../controllers/MessageController.js';
 
 
 const router = express.Router();
@@ -37,5 +38,8 @@ router.delete('/comment/:id', protect, deleteComment);
 // Reply routes
 router.post('/reply', protect, replyToComment);
 router.get('/reply/comment/:id', protect, getRepliesByCommentId);
+
+// Messages
+router.post('/messages', protect, sendMessage);
 
 export default router;

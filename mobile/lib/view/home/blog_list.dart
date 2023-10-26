@@ -83,10 +83,8 @@ class BlogList extends StatelessWidget {
                         IconButton(
                             onPressed: () => showModalBottomSheet(
                                 context: context,
-                                builder: (ctx) => PostActionBottomSheet(
-                                      blogId: data.id,
-                                      posterId: data.author.id,
-                                    )),
+                                builder: (ctx) =>
+                                    PostActionBottomSheet(data: data)),
                             icon: const Icon(Icons.more_vert)),
                         // userId == data.author.id
                         //     ? const SizedBox.shrink()

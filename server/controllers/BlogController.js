@@ -1,7 +1,7 @@
-import Blog from '../models/blog_model.js';
+import Blog from '../models/BlogModel.js';
 import httpStatus from 'http-status';
 import mongoose, { Query } from 'mongoose';
-import User from '../models/user_model.js';
+import User from '../models/UserModel.js';
 import { query } from 'express';
 
 export const createBlog = async (req, res) => {

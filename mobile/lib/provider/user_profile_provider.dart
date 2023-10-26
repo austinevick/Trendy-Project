@@ -9,8 +9,8 @@ import '../../repository/auth_repository.dart';
 import '../model/auth/register_model.dart';
 import '../model/auth/user_model.dart';
 
-final userDataProvider = FutureProvider.family(
-    (ref, String id) => ref.watch(userProfileProvider).getUserData(id));
+final userDataProvider =
+    FutureProvider((ref) => ref.watch(userProfileProvider).getUserData());
 
 final userProfileProvider = Provider((ref) => UserProfileProvider(ref));
 
@@ -19,9 +19,9 @@ class UserProfileProvider {
 
   UserProfileProvider(this.ref);
 
-  Future<UserResponseData> getUserData(userId) async {
+  Future<UserResponseData> getUserData() async {
     try {
-      final response = await AuthRepository.getUserData(userId);
+      final response = await AuthRepository.getUserData();
       return response.data!;
     } on SocketException catch (_) {
       rethrow;

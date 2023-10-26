@@ -21,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
       return DefaultTabController(
         length: 2,
         child: Scaffold(
-            body: ref.watch(userDataProvider(userId)).when(
+            body: ref.watch(userDataProvider).when(
                 data: (data) => NestedScrollView(
                     headerSliverBuilder: (context, innerBoxIsScrolled) => [
                           SliverAppBar(
@@ -98,7 +98,7 @@ class ProfileScreen extends StatelessWidget {
                 error: (e, t) => Padding(
                       padding: const EdgeInsets.only(top: 150),
                       child: CustomErrorWidget(
-                        onPressed: () => ref.refresh(userDataProvider(userId)),
+                        onPressed: () => ref.refresh(userDataProvider),
                       ),
                     ),
                 loading: () => const Center(

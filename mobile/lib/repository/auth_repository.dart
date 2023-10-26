@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:client/model/auth/users_model.dart';
 import 'package:http/http.dart';
 
 import '../common/api.dart';
@@ -28,12 +29,21 @@ class AuthRepository {
     return RegisterResponseModel.fromJson(data);
   }
 
-  static Future<UserResponseModel> getUserData(String id) async {
+  static Future<UserResponseModel> getUserData() async {
     final token = await StorageProvider().getToken();
+    final id = await StorageProvider().getUserId();
     final response = await _client.get(Uri.parse("${baseUrl}user/$id"),
         headers: {"Authorization": token!}).timeout(timeLimit);
     final data = jsonDecode(response.body);
     return UserResponseModel.fromJson(data);
+  }
+
+  static Future<UsersResponseModel> getAllUsers() async {
+    final token = await StorageProvider().getToken();
+    final response = await _client.get(Uri.parse("${baseUrl}user/all"),
+        headers: {"Authorization": token!}).timeout(timeLimit);
+    final data = jsonDecode(response.body);
+    return UsersResponseModel.fromJson(data);
   }
 
   static Future<UserPostModel> getUserPosts(String id) async {
