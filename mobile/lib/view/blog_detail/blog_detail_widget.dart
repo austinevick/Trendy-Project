@@ -31,121 +31,120 @@ class _BlogDetailWidgetState extends State<BlogDetailWidget> {
       final userId = ref.watch(authProvider).value;
       return InkWell(
         onTap: widget.onPressed,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 14),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(100),
-                      child: SizedBox(
-                        height: 50,
-                        width: 50,
-                        child: CachedNetworkImage(
-                          imageUrl: widget.data.author.imageUrl,
-                          fit: BoxFit.cover,
-                          errorWidget: (context, url, error) =>
-                              const CircleAvatar(
-                            child: Icon(Icons.person_outline),
-                          ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(100),
+                    child: SizedBox(
+                      height: 50,
+                      width: 50,
+                      child: CachedNetworkImage(
+                        imageUrl: widget.data.author.imageUrl,
+                        fit: BoxFit.cover,
+                        errorWidget: (context, url, error) =>
+                            const CircleAvatar(
+                          child: Icon(Icons.person_outline),
                         ),
                       ),
                     ),
-                    const SizedBox(width: 8),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "${widget.data.author.lastName} ${widget.data.author.firstName}",
-                          style: const TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w700),
-                        ),
-                        Text(
-                          widget.data.author.profession,
-                          overflow: TextOverflow.ellipsis,
-                          softWrap: false,
-                          style: TextStyle(
-                              fontSize: 13, color: Colors.grey.shade800),
-                        ),
-                        Text(
-                          t.format(widget.data.createdAt),
-                          style:
-                              const TextStyle(fontSize: 13, color: Colors.grey),
-                        )
-                      ],
-                    ),
-                    const Spacer(),
-                    TextButton(onPressed: () {}, child: const Text('Follow'))
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: ReadMore(text: widget.data.content),
-              ),
-              const SizedBox(height: 8),
-              buildMediaWidget(widget.data.mediaType, context),
-              const SizedBox(height: 14),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Row(
-                  children: [
-                    widget.data.likes.isEmpty
-                        ? const SizedBox.shrink()
-                        : const Icon(Icons.thumb_up, size: 12),
-                    const SizedBox(width: 4),
-                    Text(
-                      widget.data.likes.isEmpty
-                          ? ''
-                          : widget.data.likes.length.toString(),
-                      style: const TextStyle(fontSize: 12),
-                    ),
-                    const Spacer(),
-                    Text(
-                      ref.watch(blogProvider).setBlogCommentsText(widget.data),
-                      style: const TextStyle(fontSize: 12),
-                    )
-                  ],
-                ),
-              ),
-              const Divider(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  CustomIconButton(
-                      onPressed: () => ref
-                          .read(blogProvider)
-                          .likeBlog(widget.data.id)
-                          .whenComplete(() => ref
-                              .invalidate(blogFutureProvider(widget.data.id))),
-                      tooltip: 'Like',
-                      icon: widget.data.likes.contains(userId)
-                          ? Icons.thumb_up
-                          : Icons.thumb_up_outlined,
-                      color: widget.data.likes.contains(userId)
-                          ? primaryLightColor
-                          : Theme.of(context).iconTheme.color),
-                  CustomIconButton(
-                      onPressed: widget.onCommentTap!,
-                      icon: Icons.comment_outlined,
-                      tooltip: 'Comment'),
-                  CustomIconButton(
-                      onPressed: () {},
-                      icon: Icons.repeat_outlined,
-                      tooltip: 'Repost'),
-                  CustomIconButton(
-                      onPressed: () {},
-                      icon: Icons.share_outlined,
-                      tooltip: 'Share'),
+                  ),
+                  const SizedBox(width: 8),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${widget.data.author.lastName} ${widget.data.author.firstName}",
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w700),
+                      ),
+                      Text(
+                        widget.data.author.profession,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: false,
+                        style: TextStyle(
+                            fontSize: 13, color: Colors.grey.shade800),
+                      ),
+                      Text(
+                        t.format(widget.data.createdAt),
+                        style:
+                            const TextStyle(fontSize: 13, color: Colors.grey),
+                      )
+                    ],
+                  ),
+                  const Spacer(),
+                  TextButton(onPressed: () {}, child: const Text('Follow'))
                 ],
-              )
-            ],
-          ),
+              ),
+            ),
+            const SizedBox(height: 10),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: ReadMore(text: widget.data.content),
+            ),
+            const SizedBox(height: 8),
+            buildMediaWidget(widget.data.mediaType, context),
+            const SizedBox(height: 14),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: [
+                  widget.data.likes.isEmpty
+                      ? const SizedBox.shrink()
+                      : const Icon(Icons.thumb_up, size: 12),
+                  const SizedBox(width: 4),
+                  Text(
+                    widget.data.likes.isEmpty
+                        ? ''
+                        : widget.data.likes.length.toString(),
+                    style: const TextStyle(fontSize: 12),
+                  ),
+                  const Spacer(),
+                  Text(
+                    ref.watch(blogProvider).setBlogCommentsText(widget.data),
+                    style: const TextStyle(fontSize: 12),
+                  )
+                ],
+              ),
+            ),
+            Divider(color: Colors.grey.shade300),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CustomIconButton(
+                    onPressed: () {
+                      ref.read(blogProvider).likeBlog(widget.data.id);
+                      Future.delayed(const Duration(milliseconds: 200), () {
+                        ref.invalidate(blogFutureProvider(widget.data.id));
+                        ref.invalidate(blogsFutureProvider);
+                      });
+                    },
+                    tooltip: 'Like',
+                    icon: widget.data.likes.contains(userId)
+                        ? Icons.thumb_up
+                        : Icons.thumb_up_outlined,
+                    color: widget.data.likes.contains(userId)
+                        ? primaryLightColor
+                        : Theme.of(context).iconTheme.color),
+                CustomIconButton(
+                    onPressed: widget.onCommentTap!,
+                    icon: Icons.comment_outlined,
+                    tooltip: 'Comment'),
+                CustomIconButton(
+                    onPressed: () {},
+                    icon: Icons.repeat_outlined,
+                    tooltip: 'Repost'),
+                CustomIconButton(
+                    onPressed: () {},
+                    icon: Icons.share_outlined,
+                    tooltip: 'Share'),
+              ],
+            )
+          ],
         ),
       );
     });

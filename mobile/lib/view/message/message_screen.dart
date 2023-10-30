@@ -1,3 +1,4 @@
+import 'package:client/common/utils.dart';
 import 'package:client/view/widget/profile_image.dart';
 import 'package:flutter/material.dart';
 import "package:collection/collection.dart";
@@ -24,6 +25,7 @@ class _MessageScreenState extends State<MessageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          elevation: 5,
           leadingWidth: 280,
           leading: Row(
             children: [

@@ -23,11 +23,11 @@ class HomeView extends StatelessWidget {
         drawer: const UserDrawer(),
         appBar: AppBar(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          leadingWidth: 57,
+          leadingWidth: 60,
           leading: GestureDetector(
             onTap: () => scaffoldKey.currentState!.openDrawer(),
             child: const Padding(
-              padding: EdgeInsets.only(left: 12, top: 5, bottom: 4),
+              padding: EdgeInsets.only(left: 12, top: 4, bottom: 4),
               child: ProfileImage(),
             ),
           ),

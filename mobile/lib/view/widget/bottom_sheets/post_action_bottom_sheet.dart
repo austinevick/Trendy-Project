@@ -40,12 +40,15 @@ class _PostActionBottomSheetState extends State<PostActionBottomSheet> {
               title: const Text('Bookmark', style: style),
             ),
             ListTile(
-              onTap: () => push(MessageScreen(
-                userId: widget.data.author.id,
-                firstName: widget.data.author.firstName,
-                lastName: widget.data.author.lastName,
-                image: widget.data.author.imageUrl,
-              )),
+              onTap: () {
+                pop();
+                push(MessageScreen(
+                  userId: widget.data.author.id,
+                  firstName: widget.data.author.firstName,
+                  lastName: widget.data.author.lastName,
+                  image: widget.data.author.imageUrl,
+                ));
+              },
               leading: const Icon(Icons.chat_outlined),
               title:
                   Text('Message ${widget.data.author.firstName}', style: style),

@@ -4,6 +4,7 @@ import Blog from "../models/BlogModel.js";
 
 export const createComment = async (req, res) => {
     try {
+
         const comment = new Comments(req.body);
         const newData = await comment.save();
         await Blog.findByIdAndUpdate(req.body.blog_id,
@@ -17,7 +18,7 @@ export const createComment = async (req, res) => {
             message: 'Success',
         });
     } catch (error) {
-        console.log(error.message);
+        console.log(error);
         return res.status(400).json({
             status: httpStatus.BAD_REQUEST,
             message: error.message

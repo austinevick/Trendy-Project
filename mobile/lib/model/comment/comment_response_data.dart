@@ -75,7 +75,7 @@ class CreatedBy {
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
-        about: json["about"],
+        about: json["about"] ?? '',
         followers: List<dynamic>.from(json["followers"].map((x) => x)),
         imageUrl: json["imageUrl"],
         profession: json["profession"],

@@ -33,36 +33,18 @@ class BlogProvider extends ChangeNotifier {
   double progress = 0;
 
   Future<List<BlogResponseData>> fetchBlog() async {
-    try {
-      final response = await ref.watch(blogRepository).fetchBlog();
-      return response.data;
-    } on SocketException catch (_) {
-      rethrow;
-    } catch (_) {
-      rethrow;
-    }
+    final response = await ref.watch(blogRepository).fetchBlog();
+    return response.data;
   }
 
   Future<BlogResponseData> fetchBlogById(String id) async {
-    try {
-      final response = await ref.watch(blogRepository).fetchBlogById(id);
-      return response.data!;
-    } on SocketException catch (_) {
-      rethrow;
-    } catch (_) {
-      rethrow;
-    }
+    final response = await ref.watch(blogRepository).fetchBlogById(id);
+    return response.data!;
   }
 
   Future<List<UserPostModelData>> getUserPosts(String id) async {
-    try {
-      final response = await AuthRepository.getUserPosts(id);
-      return response.data;
-    } on SocketException catch (_) {
-      rethrow;
-    } catch (_) {
-      rethrow;
-    }
+    final response = await AuthRepository.getUserPosts(id);
+    return response.data;
   }
 
   Future<void> likeBlog(String blogId) async {

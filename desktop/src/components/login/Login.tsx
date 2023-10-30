@@ -41,7 +41,7 @@ export const Login = ({ setToken }: TokenProps) => {
 
     return (
         <div className="login">
-            <h3>Welcome back to Trendy</h3>
+            <h3 className='title'>SIGN IN TO TRENDY</h3>
             <form onSubmit={onSubmit}>
                 <div className='email'>
                     <input
@@ -72,6 +72,7 @@ export const Login = ({ setToken }: TokenProps) => {
                         width: '25rem',
                         borderRadius: '8px',
                         marginTop: '25px',
+                        marginBottom: '25px',
                         ":hover": {
                             background: '#1976d2'
                         }
@@ -82,7 +83,15 @@ export const Login = ({ setToken }: TokenProps) => {
                         }} />
                         : <div>LOGIN</div>}
                 </Button>
+
             </form>
+            <div>
+                Don't have an account? <button className='redirect-btn'>Register</button>
+            </div>
         </div>
     )
-} 
+}
+
+const overlayDialog = (open: boolean) => {
+
+}

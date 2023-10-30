@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:client/common/utils.dart';
 import 'package:client/repository/auth_repository.dart';
 import 'package:client/storage/storage.dart';
-import 'package:client/view/home/home_view.dart';
+import 'package:client/view/bottom_navigation_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../common/api.dart';
 import '../model/auth/login_model.dart';
@@ -22,7 +22,7 @@ class AuthViewProvider extends StateNotifier<bool> {
       if (response.status == 200) {
         StorageProvider().saveToken(response.token!);
         StorageProvider().saveUserId(response.data!.id!);
-        push(const HomeView());
+        pushAndRemoveUntil(const BottomNavigationScreen());
       }
       if (response.status == 400) {
         showSnackBar(response.message!);
@@ -46,7 +46,7 @@ class AuthViewProvider extends StateNotifier<bool> {
       if (response.status == 201) {
         StorageProvider().saveToken(response.token!);
         StorageProvider().saveUserId(response.data!.id!);
-        push(const HomeView());
+        pushAndRemoveUntil(const BottomNavigationScreen());
       }
       if (response.status == 400) {
         showSnackBar(response.message!);

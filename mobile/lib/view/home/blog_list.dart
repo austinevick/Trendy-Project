@@ -135,11 +135,13 @@ class BlogList extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomIconButton(
-                      onPressed: () => ref
-                          .read(blogProvider)
-                          .likeBlog(data.id)
-                          .whenComplete(
-                              () => ref.invalidate(blogsFutureProvider)),
+                      onPressed: () {
+                        ref.read(blogProvider).likeBlog(data.id);
+                        Future.delayed(const Duration(milliseconds: 100), () {
+                          ref.invalidate(blogFutureProvider(data.id));
+                          ref.invalidate(blogsFutureProvider);
+                        });
+                      },
                       tooltip: 'Like',
                       icon: data.likes.contains(userId)
                           ? Icons.thumb_up
