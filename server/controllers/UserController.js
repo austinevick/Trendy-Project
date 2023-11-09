@@ -2,7 +2,7 @@ import User from '../models/UserModel.js';
 import httpStatus from 'http-status';
 import generateToken from '../utils/generate_token.js';
 import bcrypt from 'bcrypt';
-import Blog from '../models/BlogModel.js';
+import Post from '../models/PostModel.js';
 
 
 export const getUserById = async (req, res) => {
@@ -51,7 +51,7 @@ export const getUsers = async (req, res) => {
 };
 export const getUserPosts = async (req, res) => {
     try {
-        const posts = await Blog.where('author').equals(req.params.id)
+        const posts = await Post.where('author').equals(req.params.id)
             .select('content mediaType mediaUrl')
             .exec();
         return res.status(200).json({

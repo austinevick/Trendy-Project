@@ -1,13 +1,13 @@
 import Comments from "../models/CommentModel.js";
 import httpStatus from 'http-status';
-import Blog from "../models/BlogModel.js";
+import Post from "../models/PostModel.js";
 
 export const createComment = async (req, res) => {
     try {
 
         const comment = new Comments(req.body);
         const newData = await comment.save();
-        await Blog.findByIdAndUpdate(req.body.blog_id,
+        await Post.findByIdAndUpdate(req.body.blog_id,
             {
                 $push: { comments: newData._id },
             },

@@ -1,10 +1,9 @@
 import express from 'express';
 import { followAndUnfollow, getUserById, getUserPosts, getUsers, login, register, updatePassword, updateProfilePicture, updateUserProfile } from '../controllers/UserController.js';
 import { protect } from '../utils/middleware.js';
-import { createBlog, deleteBlog, getBlogById, getBlogs, likeAndUnlikeBlog, updateBlog } from '../controllers/BlogController.js';
+import { createPost, deletePost, getPostById, getPosts, likeAndUnlikePost, updatePost } from '../controllers/PostController.js';
 import { createComment, deleteComment, getCommentByBlogId, getCommentById, likesAndUnlikeComment } from '../controllers/CommentController.js';
 import { getRepliesByCommentId, replyToComment } from '../controllers/ReplyController.js';
-import { sendMessage } from '../controllers/MessageController.js';
 
 
 const router = express.Router();
@@ -20,17 +19,17 @@ router.put('/user/password/:id', protect, updatePassword);
 router.get('/user/:id', protect, getUserById);
 router.get('/user/posts/:id', protect, getUserPosts);
 
-// Blog routes
-router.post('/blog', protect, createBlog);
-router.get('/blog', protect, getBlogs);
-router.get('/blog/:id', protect, getBlogById);
-router.put('/blog/:id', protect, updateBlog);
-router.put('/blog/likes/:id', protect, likeAndUnlikeBlog);
-router.delete('/blog/:id', protect, deleteBlog);
+// Post routes
+router.post('/post', protect, createPost);
+router.get('/post', protect, getPosts);
+router.get('/post/:id', protect, getPostById);
+router.put('/post/:id', protect, updatePost);
+router.put('/post/likes/:id', protect, likeAndUnlikePost);
+router.delete('/post/:id', protect, deletePost);
 
 // Comment routes
 router.post('/comment', protect, createComment);
-router.get('/comment/blog/:id', protect, getCommentByBlogId);
+router.get('/comment/post/:id', protect, getCommentByBlogId);
 router.get('/comment/:id', protect, getCommentById);
 router.put('/comment/likes/:id', protect, likesAndUnlikeComment);
 router.delete('/comment/:id', protect, deleteComment);
@@ -39,7 +38,5 @@ router.delete('/comment/:id', protect, deleteComment);
 router.post('/reply', protect, replyToComment);
 router.get('/reply/comment/:id', protect, getRepliesByCommentId);
 
-// Messages
-router.post('/messages', protect, sendMessage);
 
 export default router;

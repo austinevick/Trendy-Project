@@ -3,42 +3,26 @@ import bcrypt from 'bcrypt';
 
 
 const userSchema = new mongoose.Schema({
-    first_name: {
-        type: String,
-        required: true
-    },
-    last_name: {
+    username: {
         type: String,
         required: true
     },
     email: {
         type: String,
-        required: 'email is required',
+        required: true,
         unique: true,
         trim: true,
     },
-    about: { type: String },
-    profession: {
-        type: String,
-        required: true
-    },
+    bio: { type: String },
     imageUrl: { type: String, default: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Windows_10_Default_Profile_Picture.svg/2048px-Windows_10_Default_Profile_Picture.svg.png' },
     following: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
     followers: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
-    saved_post: [{ type: mongoose.Schema.ObjectId, ref: 'Blog' }],
-    posts: [{ type: mongoose.Schema.ObjectId, ref: 'Blog' }],
+    saved_post: [{ type: mongoose.Schema.ObjectId, ref: 'Post' }],
+    posts: [{ type: mongoose.Schema.ObjectId, ref: 'Post' }],
     password: {
         type: String,
-        required: 'password is required'
-    },
-    messages: [
-        {
-            message: String,
-            sender: String,
-            receiver: String,
-            time: Date
-        }
-    ]
+        required: true
+    }
 }, {
     timestamps: true
 });
