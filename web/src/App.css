@@ -1,0 +1,24 @@
+body {
+    margin: 0;
+}
+
+.home {
+    display: flex;
+    align-items: center;
+}
+
+.home .video {
+    flex-grow: 1;
+    background-color: red;
+    width: 200px;
+    height: 100vh;
+    transition: all 1s;
+}
+
+.home .comments {
+    flex-grow: 1;
+    background: green;
+    height: 100vh;
+    width: 200px;
+    transition: all 1s;
+}
